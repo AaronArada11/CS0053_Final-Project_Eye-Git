@@ -13,7 +13,10 @@ int main() {
     vector<Book> libraryInventory;
     
     // Load existing records on startup
-    loadBooksFromFile(libraryInventory);
+    if (!loadBooksFromFile(libraryInventory)) {
+        cerr << "Existing library data could not be loaded. No changes were made.\n";
+        return 1;
+    }
     
     bool isRunning = true;
     
@@ -31,6 +34,9 @@ int main() {
         switch (choice) {
             case 1:
                 addBook(libraryInventory);
+                if (!saveBooksToFile(libraryInventory)) {
+                    cerr << "Warning: Changes could not be saved.\n";
+                }
                 break;
             case 2:
                 viewAllBooks(libraryInventory);
@@ -40,14 +46,23 @@ int main() {
                 break;
             case 4:
                 updateBook(libraryInventory);
+                if (!saveBooksToFile(libraryInventory)) {
+                    cerr << "Warning: Changes could not be saved.\n";
+                }
                 break;
             case 5:
                 removeBook(libraryInventory);
+                if (!saveBooksToFile(libraryInventory)) {
+                    cerr << "Warning: Changes could not be saved.\n";
+                }
                 break;
             case 6:
                 // Save records before exiting
-                saveBooksToFile(libraryInventory);
-                cout << "Data saved. Exiting program...\n";
+                if (saveBooksToFile(libraryInventory)) {
+                    cout << "Data saved. Exiting program...\n";
+                } else {
+                    cerr << "Warning: Data could not be saved. Exiting program...\n";
+                }
                 isRunning = false;
                 break;
             default:
