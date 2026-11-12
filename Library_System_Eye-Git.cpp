@@ -1,9 +1,7 @@
 #include <iostream>
-#include <vector>
-#include "Book.h"
 #include "InputValidator.h"
 #include "FileHandler.h"
-#include "LibraryLogic.h"
+#include <vector>
 
 using namespace std;
 
@@ -11,10 +9,11 @@ using namespace std;
 // Handles the text-based menu and program integration.
 int main() {
     vector<Book> libraryInventory;
-    
-    // Load existing records on startup
-    loadBooksFromFile(libraryInventory);
-    
+    if (!loadBooksFromFile(libraryInventory)) {
+        cerr << "Existing library data could not be loaded. No changes were made.\n";
+        return 1;
+    }
+
     bool isRunning = true;
     
     while (isRunning) {
@@ -27,27 +26,34 @@ int main() {
         cout << "6. Exit\n";
         
         int choice = getValidMenuChoice(1, 6);
+        // End cleanly if the input stream closes (for example, Ctrl+Z on Windows).
+        if (cin.eof() || cin.bad()) {
+            cout << "\nInput closed. Exiting program...\n";
+            break;
+        }
         
         switch (choice) {
             case 1:
-                addBook(libraryInventory);
+                cout << "Add Books feature is not yet available.\n";
                 break;
             case 2:
-                viewAllBooks(libraryInventory);
+                cout << "View Books feature is not yet available.\n";
                 break;
             case 3:
-                searchBook(libraryInventory);
+                cout << "Search Books feature is not yet available.\n";
                 break;
             case 4:
-                updateBook(libraryInventory);
+                cout << "Update Book Details feature is not yet available.\n";
                 break;
             case 5:
-                removeBook(libraryInventory);
+                cout << "Remove Book feature is not yet available.\n";
                 break;
             case 6:
-                // Save records before exiting
-                saveBooksToFile(libraryInventory);
-                cout << "Data saved. Exiting program...\n";
+                if (saveBooksToFile(libraryInventory)) {
+                    cout << "Data saved. Exiting program...\n";
+                } else {
+                    cerr << "Warning: Data could not be saved. Exiting program...\n";
+                }
                 isRunning = false;
                 break;
             default:
