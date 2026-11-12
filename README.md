@@ -22,13 +22,14 @@ Member 3's components are present:
 - `FileHandler.h` and `FileHandler.cpp` load and save book records.
 - `Member3Tests.cpp` tests validation, missing files, malformed records, duplicate IDs, and file round trips.
 - `LibraryLogic.h` and `LibraryLogic.cpp` provide Member 4's `addBook` operation: unique IDs, required text, valid years, and positive copy counts.
-- `Library_System_Eye-Git.cpp` loads records at startup, connects option 1 to Add Books, and saves after an addition and on Exit. Options 2–5 currently display placeholders.
+- `viewAllBooks` displays all five book fields in a table with expanding text columns and a record count, or an empty-inventory message when there are no books.
+- `Library_System_Eye-Git.cpp` loads records at startup, connects options 1 and 2 to Add Books and View Books, and saves after an addition and on Exit. Options 3–5 currently display placeholders.
 
 The complete application still needs these operations:
 
-- `viewAllBooks`, `searchBook`, `updateBook`, and `removeBook` in the shared `LibraryLogic` module.
+- `searchBook`, `updateBook`, and `removeBook` in the shared `LibraryLogic` module.
 
-Add Books is available now. The other operations will be connected when their implementations are available.
+Add Books and View Books are available now. The other operations will be connected when their implementations are available.
 
 ## Book record
 
@@ -68,7 +69,7 @@ The saver writes to `library_data.txt.tmp` before replacing the main data file. 
 
 ## Build and test Member 3's modules
 
-The Member 3 test program does not depend on the missing `LibraryLogic` module.
+The Member 3 test program does not depend on the `LibraryLogic` module.
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -Wpedantic \

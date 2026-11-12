@@ -6,4 +6,6 @@
 // Returns true only when a complete, valid book was added.
 bool addBook(std::vector<Book>& books);
 
+void viewAllBooks(const std::vector<Book>& books);
+
 #endif

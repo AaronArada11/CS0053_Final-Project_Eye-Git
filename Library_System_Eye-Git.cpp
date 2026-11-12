@@ -43,7 +43,7 @@ int main() {
                 }
                 break;
             case 2:
-                cout << "View Books feature is not yet available.\n";
+                viewAllBooks(libraryInventory);
                 break;
             case 3:
                 cout << "Search Books feature is not yet available.\n";

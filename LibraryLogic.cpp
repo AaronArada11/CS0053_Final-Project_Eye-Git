@@ -2,6 +2,8 @@
 
 #include "InputValidator.h"
 
+#include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 
@@ -41,4 +43,41 @@ bool addBook(std::vector<Book>& books) {
     books.push_back(book);
     std::cout << "Book added successfully.\n";
     return true;
+}
+
+void viewAllBooks(const std::vector<Book>& books) {
+    std::cout << "\n=== View Books ===\n";
+    if (books.empty()) {
+        std::cout << "The library inventory is empty.\n";
+        return;
+    }
+
+    // Expand text columns so long values remain complete and aligned.
+    std::size_t idWidth = 10;
+    std::size_t titleWidth = 25;
+    std::size_t authorWidth = 20;
+    for (const Book& book : books) {
+        idWidth = std::max(idWidth, book.id.size() + 2);
+        titleWidth = std::max(titleWidth, book.title.size() + 2);
+        authorWidth = std::max(authorWidth, book.author.size() + 2);
+    }
+
+    const auto previousFlags = std::cout.flags();
+    std::cout << std::left
+              << std::setw(static_cast<int>(idWidth)) << "Book ID"
+              << std::setw(static_cast<int>(titleWidth)) << "Title"
+              << std::setw(static_cast<int>(authorWidth)) << "Author"
+              << std::setw(18) << "Publication Year"
+              << "Copies\n"
+              << std::string(idWidth + titleWidth + authorWidth + 28, '-') << '\n';
+
+    for (const Book& book : books) {
+        std::cout << std::setw(static_cast<int>(idWidth)) << book.id
+                  << std::setw(static_cast<int>(titleWidth)) << book.title
+                  << std::setw(static_cast<int>(authorWidth)) << book.author
+                  << std::setw(18) << book.publicationYear
+                  << book.copies << '\n';
+    }
+    std::cout.flags(previousFlags);
+    std::cout << "Total book records: " << books.size() << '\n';
 }
