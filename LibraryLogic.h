@@ -9,5 +9,6 @@ using namespace std;
 
 bool updateBook(vector<Book>& books);
 bool removeBook(vector<Book>& books);
+void searchBook(const vector<Book>& books);
 
 #endif
