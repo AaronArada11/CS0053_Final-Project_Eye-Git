@@ -120,6 +120,45 @@ bool updateBook(vector<Book>& books) {
     return true;
 }
 
+bool removeBook(vector<Book>& books) {
+    cout << "\n=== Remove Book ===\n";
+
+    const string id = getRequiredText("Enter book ID: ");
+
+    auto iterator = find_if(
+        books.begin(),
+        books.end(),
+        [&id](const Book& book) {
+            return book.id == id;
+        }
+    );
+
+    if (iterator == books.end()) {
+        cout << "Book ID not found.\n";
+        return false;
+    }
+
+    cout << "\nBook to remove:\n";
+    cout << "ID: " << iterator->id << '\n';
+    cout << "Title: " << iterator->title << '\n';
+    cout << "Author: " << iterator->author << '\n';
+    cout << "Publication year: "
+         << iterator->publicationYear << '\n';
+    cout << "Copies: " << iterator->copies << '\n';
+
+    if (!askConfirmation(
+            "\nAre you sure you want to remove this book? (Y/N): "
+        )) {
+        cout << "Book removal cancelled.\n";
+        return false;
+    }
+
+    books.erase(iterator);
+
+    cout << "Book removed successfully.\n";
+    return true;
+}
+
 // Main Program Module: Assigned to Member 1
 // Handles the text-based menu and program integration.
 int main() {
@@ -173,7 +212,11 @@ int main() {
                 break;
 
             case 5:
-                cout << "Remove Book feature is not yet available.\n";
+                if (removeBook(libraryInventory)) {
+                    if (!saveBooksToFile(libraryInventory)) {
+                        cerr << "Warning: Removed book could not be saved.\n";
+                    }
+                }
                 break;
 
             case 6:
