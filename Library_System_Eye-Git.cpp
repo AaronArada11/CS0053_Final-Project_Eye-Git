@@ -17,13 +17,16 @@ int main() {
     bool isRunning = true;
     
     while (isRunning) {
-        cout << "\n=== Library Management System ===\n";
-        cout << "1. Add Books\n";
-        cout << "2. View Books\n";
-        cout << "3. Search Books\n";
-        cout << "4. Update Book Details\n";
-        cout << "5. Remove Book\n";
-        cout << "6. Exit\n";
+        cout << "\n=================================";
+        cout << "\n||  Library Management System  ||\n";
+        cout << "=================================\n";
+        cout << "|| 1. Add Books                ||\n";
+        cout << "|| 2. View Books               ||\n";
+        cout << "|| 3. Search Books             ||\n";
+        cout << "|| 4. Update Book Details      ||\n";
+        cout << "|| 5. Remove Book              ||\n";
+        cout << "|| 6. Exit                     ||\n";
+        cout << "=================================\n";
         
         int choice = getValidMenuChoice(1, 6);
         // End cleanly if the input stream closes (for example, Ctrl+Z on Windows).
