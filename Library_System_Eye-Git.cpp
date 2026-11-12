@@ -271,11 +271,16 @@ int main() {
 
         switch (choice) {
             case 1:
-                cout << "Add Books feature is not yet available.\n";
+                if (addBook(libraryInventory)) {
+                    if (!saveBooksToFile(libraryInventory)) {
+                        cerr << "Warning: Added book could not be saved. "
+                             << "It remains in memory; choose Exit to retry saving.\n";
+                    }
+                }
                 break;
 
             case 2:
-                cout << "View Books feature is not yet available.\n";
+                viewAllBooks(libraryInventory);
                 break;
 
             case 3:
