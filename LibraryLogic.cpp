@@ -3,9 +3,37 @@
 #include "InputValidator.h"
 
 #include <algorithm>
+#include <cctype>
 #include <iomanip>
 #include <iostream>
 #include <limits>
+
+namespace {
+// Compare without case or extra whitespace, while preserving entered text.
+std::string duplicateKey(const std::string& text) {
+    std::string key;
+    bool pendingSpace = false;
+    for (unsigned char character : text) {
+        if (std::isspace(character)) {
+            pendingSpace = !key.empty();
+        } else {
+            if (pendingSpace) {
+                key += ' ';
+            }
+            key += static_cast<char>(std::tolower(character));
+            pendingSpace = false;
+        }
+    }
+    return key;
+}
+
+bool duplicateIdExists(const std::vector<Book>& books, const std::string& id) {
+    const std::string key = duplicateKey(id);
+    return std::any_of(books.begin(), books.end(), [&](const Book& book) {
+        return duplicateKey(book.id) == key;
+    });
+}
+}
 
 bool addBook(std::vector<Book>& books) {
     std::cout << "\n=== Add Book ===\n";
@@ -16,7 +44,7 @@ bool addBook(std::vector<Book>& books) {
         if (!std::cin) {
             return false;
         }
-        if (!bookIdExists(books, book.id)) {
+        if (!duplicateIdExists(books, book.id)) {
             break;
         }
         std::cout << "Book ID already exists. Enter a unique ID.\n";

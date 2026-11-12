@@ -21,7 +21,7 @@ Member 3's components are present:
 - `InputValidator.h` and `InputValidator.cpp` reject blank text, invalid numbers, and out-of-range menu choices.
 - `FileHandler.h` and `FileHandler.cpp` load and save book records.
 - `Member3Tests.cpp` tests validation, missing files, malformed records, duplicate IDs, and file round trips.
-- `LibraryLogic.h` and `LibraryLogic.cpp` provide Member 4's `addBook` operation: unique IDs, required text, valid years, and positive copy counts.
+- `LibraryLogic.h` and `LibraryLogic.cpp` provide Member 4's `addBook` operation: unique IDs, required text, valid years, and positive copy counts. ID duplicate checks ignore letter case, leading/trailing whitespace, and repeated internal whitespace, including for books loaded at startup. A duplicate ID prompts for a replacement value. Titles, authors, publication years, and copy counts may repeat across books.
 - `viewAllBooks` displays all five book fields in a table with expanding text columns and a record count, or an empty-inventory message when there are no books.
 - `Library_System_Eye-Git.cpp` loads records at startup, connects options 1 and 2 to Add Books and View Books, and saves after an addition and on Exit. Options 3–5 currently display placeholders.
 
