@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cctype>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <string>
@@ -26,10 +27,22 @@ string toUpper(string value) {
     return value;
 }
 
+string toLower(string value) {
+    transform(
+        value.begin(),
+        value.end(),
+        value.begin(),
+        [](unsigned char character) {
+            return static_cast<char>(tolower(character));
+        }
+    );
+
+    return value;
+}
+
 bool askConfirmation(const string& prompt) {
     while (true) {
-        string answer = getRequiredText(prompt);
-        answer = toUpper(answer);
+        string answer = toUpper(getRequiredText(prompt));
 
         if (answer == "Y" || answer == "YES") {
             return true;
@@ -57,6 +70,35 @@ Book* findBookById(vector<Book>& books, const string& id) {
     }
 
     return &(*iterator);
+}
+
+bool containsIgnoreCase(
+    const string& text,
+    const string& searchTerm
+) {
+    return toLower(text).find(toLower(searchTerm)) != string::npos;
+}
+
+void displayBookTableHeader() {
+    cout << left
+         << setw(20) << "Book ID"
+         << setw(35) << "Title"
+         << setw(30) << "Author"
+         << setw(20) << "Publication Year"
+         << setw(10) << "Copies"
+         << '\n';
+
+    cout << string(115, '-') << '\n';
+}
+
+void displayBook(const Book& book) {
+    cout << left
+         << setw(20) << book.id
+         << setw(35) << book.title
+         << setw(30) << book.author
+         << setw(20) << book.publicationYear
+         << setw(10) << book.copies
+         << '\n';
 }
 
 } // namespace
@@ -159,6 +201,43 @@ bool removeBook(vector<Book>& books) {
     return true;
 }
 
+void searchBook(const vector<Book>& books) {
+    cout << "\n=== Search Books ===\n";
+
+    if (books.empty()) {
+        cout << "The library inventory is empty.\n";
+        return;
+    }
+
+    const string searchTerm = getRequiredText(
+        "Enter a book title or author: "
+    );
+
+    bool bookFound = false;
+
+    for (const Book& book : books) {
+        const bool titleMatches =
+            containsIgnoreCase(book.title, searchTerm);
+
+        const bool authorMatches =
+            containsIgnoreCase(book.author, searchTerm);
+
+        if (titleMatches || authorMatches) {
+            if (!bookFound) {
+                cout << "\nSearch results:\n";
+                displayBookTableHeader();
+            }
+
+            displayBook(book);
+            bookFound = true;
+        }
+    }
+
+    if (!bookFound) {
+        cout << "No books matched \"" << searchTerm << "\".\n";
+    }
+}
+
 // Main Program Module: Assigned to Member 1
 // Handles the text-based menu and program integration.
 int main() {
@@ -200,7 +279,7 @@ int main() {
                 break;
 
             case 3:
-                cout << "Search Books feature is not yet available.\n";
+                searchBook(libraryInventory);
                 break;
 
             case 4:
