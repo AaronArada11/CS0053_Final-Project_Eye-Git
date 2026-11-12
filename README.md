@@ -21,14 +21,15 @@ Member 3's components are present:
 - `InputValidator.h` and `InputValidator.cpp` reject blank text, invalid numbers, and out-of-range menu choices.
 - `FileHandler.h` and `FileHandler.cpp` load and save book records.
 - `Member3Tests.cpp` tests validation, missing files, malformed records, duplicate IDs, and file round trips.
-- `Library_System_Eye-Git.cpp` uses Member 1's menu, loads records at startup, and saves on Exit. Options 1–5 currently display placeholders.
+- `LibraryLogic.h` and `LibraryLogic.cpp` provide Member 4's `addBook` operation: unique IDs, required text, valid years, and positive copy counts. ID duplicate checks ignore letter case, leading/trailing whitespace, and repeated internal whitespace, including for books loaded at startup. A duplicate ID prompts for a replacement value. Titles, authors, publication years, and copy counts may repeat across books.
+- `viewAllBooks` displays all five book fields in a table with expanding text columns and a record count, or an empty-inventory message when there are no books.
+- `Library_System_Eye-Git.cpp` loads records at startup, connects options 1 and 2 to Add Books and View Books, and saves after an addition and on Exit. Options 3–5 currently display placeholders.
 
-The complete application still needs these teammate-owned files:
+The complete application still needs these operations:
 
-- `LibraryLogic.h` with declarations for `addBook`, `viewAllBooks`, `searchBook`, `updateBook`, and `removeBook`.
-- `LibraryLogic.cpp` with the implementations of those five operations.
+- `searchBook`, `updateBook`, and `removeBook` in the shared `LibraryLogic` module.
 
-The current menu application compiles without these files. The five book operations will be connected when their modules are available.
+Add Books and View Books are available now. The other operations will be connected when their implementations are available.
 
 ## Book record
 
@@ -68,7 +69,7 @@ The saver writes to `library_data.txt.tmp` before replacing the main data file. 
 
 ## Build and test Member 3's modules
 
-The Member 3 test program does not depend on the missing `LibraryLogic` module.
+The Member 3 test program does not depend on the `LibraryLogic` module.
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -Wpedantic \
@@ -85,13 +86,13 @@ The tests print warnings for deliberately invalid records. A successful run exit
 In PowerShell, compile and run the menu with Member 3's modules:
 
 ```powershell
-g++ -std=c++17 -Wall -Wextra -Wpedantic Library_System_Eye-Git.cpp Book.cpp InputValidator.cpp FileHandler.cpp -o library.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic Library_System_Eye-Git.cpp Book.cpp InputValidator.cpp FileHandler.cpp LibraryLogic.cpp -o library.exe
 .\library.exe
 ```
 
 ## Build the complete application
 
-After the team adds `LibraryLogic.h` and `LibraryLogic.cpp`, compile the program with:
+After the team completes the remaining operations, compile the program with:
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -Wpedantic \
