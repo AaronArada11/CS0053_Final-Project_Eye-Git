@@ -21,14 +21,14 @@ Member 3's components are present:
 - `InputValidator.h` and `InputValidator.cpp` reject blank text, invalid numbers, and out-of-range menu choices.
 - `FileHandler.h` and `FileHandler.cpp` load and save book records.
 - `Member3Tests.cpp` tests validation, missing files, malformed records, duplicate IDs, and file round trips.
-- `Library_System_Eye-Git.cpp` uses Member 1's menu, loads records at startup, and saves on Exit. Options 1–5 currently display placeholders.
+- `LibraryLogic.h` and `LibraryLogic.cpp` provide Member 4's `addBook` operation: unique IDs, required text, valid years, and positive copy counts.
+- `Library_System_Eye-Git.cpp` loads records at startup, connects option 1 to Add Books, and saves after an addition and on Exit. Options 2–5 currently display placeholders.
 
-The complete application still needs these teammate-owned files:
+The complete application still needs these operations:
 
-- `LibraryLogic.h` with declarations for `addBook`, `viewAllBooks`, `searchBook`, `updateBook`, and `removeBook`.
-- `LibraryLogic.cpp` with the implementations of those five operations.
+- `viewAllBooks`, `searchBook`, `updateBook`, and `removeBook` in the shared `LibraryLogic` module.
 
-The current menu application compiles without these files. The five book operations will be connected when their modules are available.
+Add Books is available now. The other operations will be connected when their implementations are available.
 
 ## Book record
 
@@ -85,13 +85,13 @@ The tests print warnings for deliberately invalid records. A successful run exit
 In PowerShell, compile and run the menu with Member 3's modules:
 
 ```powershell
-g++ -std=c++17 -Wall -Wextra -Wpedantic Library_System_Eye-Git.cpp Book.cpp InputValidator.cpp FileHandler.cpp -o library.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic Library_System_Eye-Git.cpp Book.cpp InputValidator.cpp FileHandler.cpp LibraryLogic.cpp -o library.exe
 .\library.exe
 ```
 
 ## Build the complete application
 
-After the team adds `LibraryLogic.h` and `LibraryLogic.cpp`, compile the program with:
+After the team completes the remaining operations, compile the program with:
 
 ```bash
 g++ -std=c++17 -Wall -Wextra -Wpedantic \
