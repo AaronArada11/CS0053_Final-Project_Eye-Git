@@ -1,11 +1,19 @@
 #include <iostream>
 #include "InputValidator.h"
+#include "FileHandler.h"
+#include <vector>
 
 using namespace std;
 
 // Main Program Module: Assigned to Member 1
 // Handles the text-based menu and program integration.
 int main() {
+    vector<Book> libraryInventory;
+    if (!loadBooksFromFile(libraryInventory)) {
+        cerr << "Existing library data could not be loaded. No changes were made.\n";
+        return 1;
+    }
+
     bool isRunning = true;
     
     while (isRunning) {
@@ -41,8 +49,11 @@ int main() {
                 cout << "Remove Book feature is not yet available.\n";
                 break;
             case 6:
-                // Connect the file-saving module during integration.
-                cout << "Exiting program...\n";
+                if (saveBooksToFile(libraryInventory)) {
+                    cout << "Data saved. Exiting program...\n";
+                } else {
+                    cerr << "Warning: Data could not be saved. Exiting program...\n";
+                }
                 isRunning = false;
                 break;
             default:
