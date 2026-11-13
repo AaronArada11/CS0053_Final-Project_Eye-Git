@@ -26,6 +26,9 @@ int getValidInteger(const std::string& prompt, int minimum, int maximum,
             return minimum;
         }
 
+        if (trim(line) == "0") {
+            throw InputCancelled{};
+        }
         std::istringstream parser(line);
         int value;
         char extra;
@@ -51,6 +54,9 @@ std::string getRequiredText(const std::string& prompt, std::istream& input,
         }
 
         line = trim(line);
+        if (line == "0") {
+            throw InputCancelled{};
+        }
         if (!line.empty()) {
             return line;
         }

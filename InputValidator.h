@@ -3,6 +3,13 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
+
+// Cancels the current menu action without accepting a partial value.
+class InputCancelled : public std::exception {
+public:
+    const char* what() const noexcept override { return "Action cancelled."; }
+};
 
 int getValidInteger(const std::string& prompt, int minimum, int maximum,
                     std::istream& input = std::cin,

@@ -5,11 +5,9 @@
 
 #include "Book.h"
 
-using namespace std;
-
-bool updateBook(vector<Book>& books);
-bool removeBook(vector<Book>& books);
-void searchBook(const vector<Book>& books);
+bool updateBook(std::vector<Book>& books);
+bool removeBook(std::vector<Book>& books);
+void searchBook(const std::vector<Book>& books);
 
 
 // Returns true only when a complete, valid book was added.

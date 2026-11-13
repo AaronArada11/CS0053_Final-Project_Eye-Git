@@ -1,0 +1,67 @@
+Breakpoint 1 at 0x14000155a: file debug/confirmation_bug.cpp, line 30.
+
+[New Thread 21964.0x57d4]
+
+[New Thread 21964.0x1bd8]
+
+[New Thread 21964.0x5004]
+
+Save these changes? (Y/N):
+
+Thread 1 hit Breakpoint 1, askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_bug.cpp:30
+
+30	        if (answer == "Y" || answer == "YES") {
+
+
+
+--- Closed input: first loop iteration ---
+
+$1 = 1
+
+$2 = ""
+
+$3 = true
+
+$4 = true
+
+$5 = false
+
+#0  askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_bug.cpp:30
+
+#1  0x00007ff606361758 in main (argc=2, argv=0x7e34e0) at debug/confirmation_bug.cpp:52
+
+
+
+Thread 1 hit Breakpoint 1, askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_bug.cpp:30
+
+30	        if (answer == "Y" || answer == "YES") {
+
+
+
+--- Same breakpoint reached again without new input ---
+
+$6 = 2
+
+$7 = ""
+
+$8 = true
+
+$9 = true
+
+
+
+Thread 1 hit Breakpoint 1, askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_bug.cpp:30
+
+30	        if (answer == "Y" || answer == "YES") {
+
+
+
+--- Third iteration: failed stream still retried ---
+
+$10 = 3
+
+$11 = true
+
+$12 = true
+
+[Inferior 1 (process 21964) killed]
