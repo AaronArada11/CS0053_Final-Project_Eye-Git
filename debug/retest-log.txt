@@ -1,0 +1,12 @@
+Closed input
+Save these changes? (Y/N): Input ended unexpectedly.
+Confirmation result: cancelled
+Exit code: 0
+
+Yes input
+Save these changes? (Y/N): Confirmation result: accepted
+Exit code: 0
+
+No input
+Save these changes? (Y/N): Confirmation result: cancelled
+Exit code: 0

@@ -19,6 +19,48 @@
             "MIMode": "gdb",
             "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
             "preLaunchTask": "Build library application"
+        },
+        {
+            "name": "Debug confirmation bug (isolated)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/debug/confirmation-bug.exe",
+            "args": [
+                "${workspaceFolder}/debug/eof_input.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:/msys64/ucrt64/bin;${env:PATH}"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
+            "preLaunchTask": "Build confirmation bug reproduction"
+        },
+        {
+            "name": "Debug confirmation fix (isolated)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/debug/confirmation-fixed.exe",
+            "args": [
+                "${workspaceFolder}/debug/eof_input.txt"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "C:/msys64/ucrt64/bin;${env:PATH}"
+                }
+            ],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
+            "preLaunchTask": "Build confirmation fixed reproduction"
         }
     ]
 }

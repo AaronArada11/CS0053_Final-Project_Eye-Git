@@ -30,6 +30,52 @@
                 "isDefault": true
             },
             "detail": "Build the menu and its supporting modules."
+        },
+        {
+            "label": "Build confirmation bug reproduction",
+            "type": "process",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "-g",
+                "-O0",
+                "${workspaceFolder}/debug/confirmation_bug.cpp",
+                "${workspaceFolder}/InputValidator.cpp",
+                "-o",
+                "${workspaceFolder}/debug/confirmation-bug.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "Build confirmation fixed reproduction",
+            "type": "process",
+            "command": "C:/msys64/ucrt64/bin/g++.exe",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-Wpedantic",
+                "-g",
+                "-O0",
+                "${workspaceFolder}/debug/confirmation_fixed.cpp",
+                "${workspaceFolder}/InputValidator.cpp",
+                "-o",
+                "${workspaceFolder}/debug/confirmation-fixed.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
         }
     ],
     "version": "2.0.0"

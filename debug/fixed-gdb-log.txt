@@ -1,0 +1,47 @@
+Breakpoint 1 at 0x14000155a: file debug/confirmation_fixed.cpp, line 30.
+
+[New Thread 17384.0x18a0]
+
+[New Thread 17384.0x4444]
+
+[New Thread 17384.0x1240]
+
+Save these changes? (Y/N):
+
+Thread 1 hit Breakpoint 1, askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_fixed.cpp:30
+
+30	        if (!cin) {
+
+
+
+--- Closed input: first loop iteration ---
+
+$1 = 1
+
+$2 = ""
+
+$3 = true
+
+$4 = true
+
+$5 = false
+
+#0  askConfirmation (prompt="Save these changes? (Y/N): ") at debug/confirmation_fixed.cpp:30
+
+#1  0x00007ff68ddf177e in main (argc=2, argv=0xf3470) at debug/confirmation_fixed.cpp:55
+
+31	            return false;
+
+41	}
+
+Input ended unexpectedly.
+
+Confirmation result: cancelled
+
+[Thread 17384.0x4444 exited with code 0]
+
+[Thread 17384.0x1240 exited with code 0]
+
+[Thread 17384.0x18a0 exited with code 0]
+
+[Inferior 1 (process 17384) exited normally]
